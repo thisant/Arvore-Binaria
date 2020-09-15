@@ -22,21 +22,21 @@ class ArvoreBinaria {
 			opcao = le.nextInt();
 			switch (opcao) {
 			case 1: {
-				System.out.print("\n Informe o valor (long) -> ");
+				System.out.print("\n Informe o valor: ");
 				x = le.nextLong();
 				arv.inserir(x);
 				break;
 			}
 			case 2: {
-				System.out.print("\n Informe o valor (long) -> ");
+				System.out.print("\n Informe o valor: ");
 				x = le.nextLong();
 				if (!arv.remover(x))
-					System.out.print("\n Valor nao encontrado!");
+					System.out.print("\n Valor não encontrado!");
 				;
 				break;
 			}
 			case 3: {
-				System.out.print("\n Informe o valor (long) -> ");
+				System.out.print("\n Informe o valor: ");
 				x = le.nextLong();
 				if (arv.buscar(x) != null)
 					System.out.print("\n Valor Encontrado");
