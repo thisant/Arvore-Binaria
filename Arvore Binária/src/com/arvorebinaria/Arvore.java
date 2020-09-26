@@ -251,4 +251,15 @@ class Arvore {
         return cont;
     }
     
+    public int grau(long v){
+        No chave = buscar(v);
+        if(chave.esq == null && chave.dir == null){
+            return 0;
+        }else if(chave.esq != null && chave.dir != null){
+            return 2;
+        }else{
+            return 1;
+        }
+    }
+    
 }
