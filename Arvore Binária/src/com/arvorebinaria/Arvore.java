@@ -2,38 +2,38 @@ package com.arvorebinaria;
 
 class Arvore {
 
-    private No root;
+    private No raiz;
 
     public Arvore() {
-        root = null;
+        raiz = null;
     }
 
     public void inserir(long v) {
         No novo = new No();
         novo.item = v;
-        novo.dir = null;
-        novo.esq = null;
+        novo.direita = null;
+        novo.esquerda = null;
         novo.pai = null;
 
-        if (root == null) {
-            root = novo;
+        if (raiz == null) {
+            raiz = novo;
         } else {
-            No atual = root;
+            No atual = raiz;
             No anterior;
             while (true) {
                 anterior = atual;
                 if (v <= atual.item) {
-                    atual = atual.esq;
+                    atual = atual.esquerda;
                     if (atual == null) {
                         novo.pai = anterior;
-                        anterior.esq = novo;
+                        anterior.esquerda = novo;
                         return;
                     }
                 } else {
-                    atual = atual.dir;
+                    atual = atual.direita;
                     if (atual == null) {
                         novo.pai = anterior;
-                        anterior.dir = novo;
+                        anterior.direita = novo;
                         return;
                     }
                 }
@@ -43,15 +43,15 @@ class Arvore {
     }
 
     public No buscar(long chave) {
-        if (root == null) {
+        if (raiz == null) {
             return null;
         }
-        No atual = root;
+        No atual = raiz;
         while (atual.item != chave) {
             if (chave < atual.item) {
-                atual = atual.esq;
+                atual = atual.esquerda;
             } else {
-                atual = atual.dir;
+                atual = atual.direita;
             }
             if (atual == null) {
                 return null;
@@ -61,21 +61,21 @@ class Arvore {
     }
 
     public boolean remover(long v) {
-        if (root == null) {
+        if (raiz == null) {
             return false;
         }
 
-        No atual = root;
-        No pai = root;
+        No atual = raiz;
+        No pai = raiz;
         boolean filho_esq = true;
 
         while (atual.item != v) {
             pai = atual;
             if (v < atual.item) {
-                atual = atual.esq;
+                atual = atual.esquerda;
                 filho_esq = true;
             } else {
-                atual = atual.dir;
+                atual = atual.direita;
                 filho_esq = false;
             }
             if (atual == null) {
@@ -83,40 +83,40 @@ class Arvore {
             }
         }
 
-        if (atual.esq == null && atual.dir == null) {
-            if (atual == root) {
-                root = null;
+        if (atual.esquerda == null && atual.direita == null) {
+            if (atual == raiz) {
+                raiz = null;
             } else if (filho_esq) {
-                pai.esq = null;
+                pai.esquerda = null;
             } else {
-                pai.dir = null;
+                pai.direita = null;
             }
-        } else if (atual.dir == null) {
-            if (atual == root) {
-                root = atual.esq;
+        } else if (atual.direita == null) {
+            if (atual == raiz) {
+                raiz = atual.esquerda;
             } else if (filho_esq) {
-                pai.esq = atual.esq;
+                pai.esquerda = atual.esquerda;
             } else {
-                pai.dir = atual.esq;
+                pai.direita = atual.esquerda;
             }
-        } else if (atual.esq == null) {
-            if (atual == root) {
-                root = atual.dir;
+        } else if (atual.esquerda == null) {
+            if (atual == raiz) {
+                raiz = atual.direita;
             } else if (filho_esq) {
-                pai.esq = atual.dir;
+                pai.esquerda = atual.direita;
             } else {
-                pai.dir = atual.dir;
+                pai.direita = atual.direita;
             }
         } else {
             No sucessor = no_sucessor(atual);
-            if (atual == root) {
-                root = sucessor;
+            if (atual == raiz) {
+                raiz = sucessor;
             } else if (filho_esq) {
-                pai.esq = sucessor;
+                pai.esquerda = sucessor;
             } else {
-                pai.dir = sucessor;
+                pai.direita = sucessor;
             }
-            sucessor.esq = atual.esq;
+            sucessor.esquerda = atual.esquerda;
 
         }
 
@@ -126,70 +126,70 @@ class Arvore {
     public No no_sucessor(No apaga) {
         No paidosucessor = apaga;
         No sucessor = apaga;
-        No atual = apaga.dir;
+        No atual = apaga.direita;
 
         while (atual != null) {
             paidosucessor = sucessor;
             sucessor = atual;
-            atual = atual.esq;
+            atual = atual.esquerda;
         }
 
-        if (sucessor != apaga.dir) {
-            paidosucessor.esq = sucessor.dir;
+        if (sucessor != apaga.direita) {
+            paidosucessor.esquerda = sucessor.direita;
 
-            sucessor.dir = apaga.dir;
+            sucessor.direita = apaga.direita;
         }
         return sucessor;
     }
 
     public void caminhar() {
-        System.out.print("\n Exibindo em ordem: ");
-        inOrder(root);
-        System.out.print("\n Exibindo em pos-ordem: ");
-        posOrder(root);
-        System.out.print("\n Exibindo em pre-ordem: ");
-        preOrder(root);
-        System.out.print("\n Altura da arvore: " + altura(root));
-        System.out.print("\n Quantidade de folhas: " + folhas(root));
-        System.out.print("\n Quantidade de N√≥s: " + contarNos(root));
-        if (root != null) {
+        System.out.print("\n Ordem: ");
+        inOrder(raiz);
+        System.out.print("\n PÛs-ordem: ");
+        posOrder(raiz);
+        System.out.print("\n PrÈ-ordem: ");
+        preOrder(raiz);
+        System.out.print("\n Altura da ·rvore: " + altura(raiz));
+        System.out.print("\n Quantidade de folhas: " + folhas(raiz));
+        System.out.print("\n Quantidade de nÛs: " + contarNos(raiz));
+        if (raiz != null) {
             System.out.print("\n Valor minimo: " + min().item);
-            System.out.println("\n Valor maximo: " + max().item);
+            System.out.println("\n Valor m·ximo: " + max().item);
         }
     }
 
     public void inOrder(No atual) {
         if (atual != null) {
-            inOrder(atual.esq);
+            inOrder(atual.esquerda);
             System.out.print(atual.item + " ");
-            inOrder(atual.dir);
+            inOrder(atual.direita);
         }
     }
 
     public void preOrder(No atual) {
         if (atual != null) {
             System.out.print(atual.item + " ");
-            preOrder(atual.esq);
-            preOrder(atual.dir);
+            preOrder(atual.esquerda);
+            preOrder(atual.direita);
         }
     }
 
     public void posOrder(No atual) {
         if (atual != null) {
-            posOrder(atual.esq);
-            posOrder(atual.dir);
+            posOrder(atual.esquerda);
+            posOrder(atual.direita);
             System.out.print(atual.item + " ");
         }
     }
 
     public int altura(No atual) {
-        if (atual == null || (atual.esq == null && atual.dir == null)) {
+        if (atual == null || (atual.esquerda == null && atual.direita == null)) {
             return 0;
         } else {
-            if (altura(atual.esq) > altura(atual.dir)) {
-                return (1 + altura(atual.esq));
+            if (altura(atual.esquerda) > altura(atual.direita)) {
+                return (1 + altura(atual.esquerda));
             } else {
-                return (1 + altura(atual.dir));
+                return (1 + altura(atual.direita));
             }
         }
     }
@@ -198,36 +198,36 @@ class Arvore {
         if (atual == null) {
             return 0;
         }
-        if (atual.esq == null && atual.dir == null) {
+        if (atual.esquerda == null && atual.direita == null) {
             return 1;
         }
-        return folhas(atual.esq) + folhas(atual.dir);
+        return folhas(atual.esquerda) + folhas(atual.direita);
     }
 
     public int contarNos(No atual) {
         if (atual == null) {
             return 0;
         } else {
-            return (1 + contarNos(atual.esq) + contarNos(atual.dir));
+            return (1 + contarNos(atual.esquerda) + contarNos(atual.direita));
         }
     }
 
     public No min() {
-        No atual = root;
+        No atual = raiz;
         No anterior = null;
         while (atual != null) {
             anterior = atual;
-            atual = atual.esq;
+            atual = atual.esquerda;
         }
         return anterior;
     }
 
     public No max() {
-        No atual = root;
+        No atual = raiz;
         No anterior = null;
         while (atual != null) {
             anterior = atual;
-            atual = atual.dir;
+            atual = atual.direita;
         }
         return anterior;
     }
@@ -245,7 +245,7 @@ class Arvore {
                 cont++;
             }
         }else{
-            System.out.println("Valor n√£o encontrado");
+            System.out.println("Valor n„o encontrado");
             return 0;
         }
         return cont;
@@ -253,9 +253,9 @@ class Arvore {
     
     public int grau(long v){
         No chave = buscar(v);
-        if(chave.esq == null && chave.dir == null){
+        if(chave.esquerda == null && chave.direita == null){
             return 0;
-        }else if(chave.esq != null && chave.dir != null){
+        }else if(chave.esquerda != null && chave.direita != null){
             return 2;
         }else{
             return 1;

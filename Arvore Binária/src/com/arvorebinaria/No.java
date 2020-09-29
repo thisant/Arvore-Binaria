@@ -2,7 +2,7 @@ package com.arvorebinaria;
 
 public class No {
 	public long item;
-	public No dir;
-	public No esq;
-        public No pai;
+	public No direita;
+	public No esquerda;
+    public No pai;
 }
