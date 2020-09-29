@@ -241,7 +241,7 @@ class Arvore {
         }
         if(chave != null){
             while(aux.pai != null){
-                aux = chave.pai;
+                aux = aux.pai;
                 cont++;
             }
         }else{
