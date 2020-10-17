@@ -1,8 +1,13 @@
 package com.arvorebinaria;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Iterator;
+
 class Arvore {
 
     private No raiz;
+    private String list;
 
     public Arvore() {
         raiz = null;
@@ -143,18 +148,20 @@ class Arvore {
     }
 
     public void caminhar() {
-        System.out.print("\n Ordem: ");
+        System.out.println("Arvore Atual: ");
+        arvore(raiz);
+        System.out.print("\n In-Ordem: ");
         inOrder(raiz);
-        System.out.print("\n Pós-ordem: ");
+        System.out.print("\n Pos-ordem: ");
         posOrder(raiz);
-        System.out.print("\n Pré-ordem: ");
+        System.out.print("\n Pre-ordem: ");
         preOrder(raiz);
-        System.out.print("\n Altura da árvore: " + altura(raiz));
+        System.out.print("\n Altura da Arvore: " + altura(raiz));
         System.out.print("\n Quantidade de folhas: " + folhas(raiz));
-        System.out.print("\n Quantidade de nós: " + contarNos(raiz));
+        System.out.print("\n Quantidade de nï¿½s: " + contarNos(raiz));
         if (raiz != null) {
             System.out.print("\n Valor minimo: " + min().item);
-            System.out.println("\n Valor máximo: " + max().item);
+            System.out.println("\n Valor mï¿½ximo: " + max().item);
         }
     }
 
@@ -232,34 +239,86 @@ class Arvore {
         return anterior;
     }
 
-    public int profundidade (long v){
+    public int profundidade(long v) {
         No chave = buscar(v);
         No aux = chave;
         int cont = 0;
-        if(chave.pai == null){
+        if (chave.pai == null) {
             return 0;
         }
-        if(chave != null){
-            while(aux.pai != null){
+        if (chave != null) {
+            while (aux.pai != null) {
                 aux = aux.pai;
                 cont++;
             }
-        }else{
-            System.out.println("Valor não encontrado");
+        } else {
+            System.out.println("Valor nï¿½o encontrado");
             return 0;
         }
         return cont;
     }
-    
-    public int grau(long v){
+
+    public int grau(long v) {
         No chave = buscar(v);
-        if(chave.esquerda == null && chave.direita == null){
+        if (chave.esquerda == null && chave.direita == null) {
             return 0;
-        }else if(chave.esquerda != null && chave.direita != null){
+        } else if (chave.esquerda != null && chave.direita != null) {
             return 2;
-        }else{
+        } else {
             return 1;
         }
     }
+
+    public void converterBinarioBusca(No raiz, Iterator<Integer> it) {
+        if (raiz == null) {
+            return;
+        }
+        converterBinarioBusca(raiz.esquerda, it);
+        raiz.item = it.next();
+        converterBinarioBusca(raiz.direita, it);
+    }
+
+    public void imprimirArvore(No atual) {
+        long nivel;
+        if (atual != null) {
+            nivel = this.profundidade(atual.item);
+        }
+
+    }
+
+    public void arvore(No no) {
+        if (no == null) {
+            throw new IllegalArgumentException("Tree node cannot be null!");
+        }
+        Deque<No> fila = new ArrayDeque<>();
+        fila.add(no);
+        while (!fila.isEmpty()) {
+            No atual = fila.removeFirst();
+            System.out.printf("%s, ", atual.item);
+            if (atual.getEsquerda() != null) {
+                fila.add(atual.getEsquerda());
+            }
+            if (atual.getDireita() != null) {
+                fila.add(atual.getDireita());
+            }
+        }
+    }
     
+    public void inverterSubArvore(No aux){
+        if(aux != null){
+            No aux2 = aux.esquerda;
+            aux.esquerda = aux.direita;
+            aux.direita = aux2;
+            this.inverterSubArvore(aux.esquerda);
+            this.inverterSubArvore(aux.direita);
+        }
+    }
+    
+    public void inverterEimprimir(){
+        System.out.println("Arvore Atual: ");
+        arvore(this.raiz);
+        this.inverterSubArvore(this.raiz);
+        System.out.println("\nArvore Invertida: ");
+        arvore(this.raiz);
+    }
 }
