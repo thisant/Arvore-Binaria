@@ -148,7 +148,7 @@ class Arvore {
     }
 
     public void caminhar() {
-        System.out.println("Arvore Atual: ");
+        System.out.print(" Arvore Atual: ");
         arvore(raiz);
         System.out.print("\n In-Ordem: ");
         inOrder(raiz);
@@ -156,6 +156,8 @@ class Arvore {
         posOrder(raiz);
         System.out.print("\n Pre-ordem: ");
         preOrder(raiz);
+        System.out.print("\n Árvore de Binaria de Busca: ");
+		converterBinarioBusca(raiz);
         System.out.print("\n Altura da Arvore: " + altura(raiz));
         System.out.print("\n Quantidade de folhas: " + folhas(raiz));
         System.out.print("\n Quantidade de n�s: " + contarNos(raiz));
@@ -303,9 +305,9 @@ class Arvore {
             }
         }
     }
-    
-    public void inverterSubArvore(No aux){
-        if(aux != null){
+
+    public void inverterSubArvore(No aux) {
+        if (aux != null) {
             No aux2 = aux.esquerda;
             aux.esquerda = aux.direita;
             aux.direita = aux2;
@@ -313,12 +315,20 @@ class Arvore {
             this.inverterSubArvore(aux.direita);
         }
     }
-    
-    public void inverterEimprimir(){
+
+    public void inverterEimprimir() {
         System.out.println("Arvore Atual: ");
         arvore(this.raiz);
         this.inverterSubArvore(this.raiz);
         System.out.println("\nArvore Invertida: ");
         arvore(this.raiz);
+    }
+
+    public void converterBinarioBusca(No raiz) {
+        if (raiz != null) {
+            converterBinarioBusca(raiz.esquerda);
+            System.out.print(raiz.item + " ");
+            converterBinarioBusca(raiz.direita);
+        }
     }
 }
