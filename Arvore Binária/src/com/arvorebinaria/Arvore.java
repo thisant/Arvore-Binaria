@@ -2,7 +2,6 @@ package com.arvorebinaria;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Iterator;
 
 class Arvore {
 
@@ -148,7 +147,7 @@ class Arvore {
     }
 
     public void caminhar() {
-        System.out.print(" Arvore Atual: ");
+        System.out.print("\n ¡rvore Atual: ");
         arvore(raiz);
         System.out.print("\n In-Ordem: ");
         inOrder(raiz);
@@ -156,14 +155,14 @@ class Arvore {
         posOrder(raiz);
         System.out.print("\n Pre-ordem: ");
         preOrder(raiz);
-        System.out.print("\n √Årvore de Binaria de Busca: ");
+        System.out.print("\n Convertendo para ·rvore de binaria de busca: ");
 		converterBinarioBusca(raiz);
-        System.out.print("\n Altura da Arvore: " + altura(raiz));
+        System.out.print("\n Altura da ·rvore: " + altura(raiz));
         System.out.print("\n Quantidade de folhas: " + folhas(raiz));
-        System.out.print("\n Quantidade de nÔøΩs: " + contarNos(raiz));
+        System.out.print("\n Quantidade de nÛs: " + contarNos(raiz));
         if (raiz != null) {
-            System.out.print("\n Valor minimo: " + min().item);
-            System.out.println("\n Valor mÔøΩximo: " + max().item);
+            System.out.print("\n Valor mÌnimo: " + min().item);
+            System.out.println("\n Valor m·ximo: " + max().item);
         }
     }
 
@@ -188,6 +187,14 @@ class Arvore {
             posOrder(atual.esquerda);
             posOrder(atual.direita);
             System.out.print(atual.item + " ");
+        }
+    }
+    
+    public void converterBinarioBusca(No raiz) {
+        if (raiz != null) {
+            converterBinarioBusca(raiz.esquerda);
+            System.out.print(raiz.item + " ");
+            converterBinarioBusca(raiz.direita);
         }
     }
 
@@ -248,15 +255,10 @@ class Arvore {
         if (chave.pai == null) {
             return 0;
         }
-        if (chave != null) {
-            while (aux.pai != null) {
-                aux = aux.pai;
-                cont++;
-            }
-        } else {
-            System.out.println("Valor nÔøΩo encontrado");
-            return 0;
-        }
+        while (aux.pai != null) {
+		    aux = aux.pai;
+		    cont++;
+		}
         return cont;
     }
 
@@ -271,15 +273,6 @@ class Arvore {
         }
     }
 
-    public void converterBinarioBusca(No raiz, Iterator<Integer> it) {
-        if (raiz == null) {
-            return;
-        }
-        converterBinarioBusca(raiz.esquerda, it);
-        raiz.item = it.next();
-        converterBinarioBusca(raiz.direita, it);
-    }
-
     public void imprimirArvore(No atual) {
         long nivel;
         if (atual != null) {
@@ -290,13 +283,13 @@ class Arvore {
 
     public void arvore(No no) {
         if (no == null) {
-            throw new IllegalArgumentException("Tree node cannot be null!");
+            throw new IllegalArgumentException("O nÛ da ·rvore n„o pode ser nulo!");
         }
         Deque<No> fila = new ArrayDeque<>();
         fila.add(no);
         while (!fila.isEmpty()) {
             No atual = fila.removeFirst();
-            System.out.printf("%s, ", atual.item);
+            System.out.print(atual.item + " ");
             if (atual.getEsquerda() != null) {
                 fila.add(atual.getEsquerda());
             }
@@ -317,18 +310,10 @@ class Arvore {
     }
 
     public void inverterEimprimir() {
-        System.out.println("Arvore Atual: ");
+        System.out.print("\n¡rvore atual: ");
         arvore(this.raiz);
         this.inverterSubArvore(this.raiz);
-        System.out.println("\nArvore Invertida: ");
+        System.out.print("\n¡rvore invertida: ");
         arvore(this.raiz);
-    }
-
-    public void converterBinarioBusca(No raiz) {
-        if (raiz != null) {
-            converterBinarioBusca(raiz.esquerda);
-            System.out.print(raiz.item + " ");
-            converterBinarioBusca(raiz.direita);
-        }
     }
 }

@@ -11,77 +11,78 @@ class ArvoreBinaria {
         int i;
         int a = 0;
         long x;
-        System.out.print("\nï¿½rvore binï¿½ria");
+        System.out.print("\nÁrvore binária");
         do {
             System.out.print("\n***********************************");
             System.out.print("\nMenu:");
-            System.out.print("\n -1: Inserir nï¿½");
-            System.out.print("\n -2: Remover nï¿½");
-            System.out.print("\n -3: Profundidade do nï¿½");
-            System.out.print("\n -4: Nivel do nï¿½");
-            System.out.print("\n -5: Grau do nï¿½");
+            System.out.print("\n -1: Inserir nó");
+            System.out.print("\n -2: Remover nó");
+            System.out.print("\n -3: Profundidade do nó");
+            System.out.print("\n -4: Nivel do nó");
+            System.out.print("\n -5: Grau do nó");
             System.out.print("\n -6: Consultar valor");
-            System.out.print("\n -7: Exibir ï¿½rvore");
-            System.out.print("\n -8: Inverter Sub-Arvore");
+            System.out.print("\n -7: Exibir árvore");
+            System.out.print("\n -8: Inverter sub-árvore");
             System.out.print("\n -9: Sair do programa");
             System.out.print("\n***********************************");
-            System.out.print("\nInsira a opï¿½ï¿½o desejada:");
+            System.out.print("\nInsira a opção desejada:");
             opcao = le.nextInt();
             switch (opcao) {
                 case 1: {
-                    System.out.println("Informe a quantidade de nï¿½s a serem inseridos: ");
+                    System.out.println("Informe a quantidade de nós a serem inseridos: ");
                     a = le.nextInt();
                     for (i = 1; i <= a; i = i + 1) {
-                        System.out.print("\nInforme o valor do nï¿½ para inserir: ");
+                        System.out.print("\nInforme o valor do nó para inserir: ");
                         x = le.nextLong();
                         arv.inserir(x);
                     }
                     break;
                 }
                 case 2: {
-                    System.out.print("\nInforme o valor do nï¿½ a ser removido: ");
+                    System.out.print("\nInforme o valor do nó a ser removido: ");
                     x = le.nextLong();
-                    System.out.print("\nO nï¿½ " + x + " foi removido: ");
+                    System.out.print("\nO nó " + x + " foi removido: ");
                     if (!arv.remover(x)) {
-                        System.out.print("\n Valor nï¿½o encontrado!");
+                        System.out.print("\n Valor não encontrado!");
                     }
                     ;
                     break;
                 }
                 case 3: {
-                    System.out.print("\nInforme o valor do nï¿½: ");
+                    System.out.print("\nInforme o valor do nó: ");
                     x = le.nextLong();
                     System.out.println("Profundidade de " + x + ": " + arv.profundidade(x));
                     break;
                 }
                 case 4: {
-                    System.out.print("\nInforme o valor do nï¿½: ");
+                    System.out.print("\nInforme o valor do nó: ");
                     x = le.nextLong();
-                    System.out.println("Nï¿½vel de " + x + ": " + arv.profundidade(x));
+                    System.out.println("Nível de " + x + ": " + arv.profundidade(x));
                     break;
                 }
                 case 5: {
-                    System.out.print("\nInforme o valor do nï¿½: ");
+                    System.out.print("\nInforme o valor do nó: ");
                     x = le.nextLong();
                     System.out.println("Grau de " + x + ": " + arv.grau(x));
                     break;
                 }
                 case 6: {
-                    System.out.print("\nInforme o valor do nï¿½ a ser consultado: ");
+                    System.out.print("\nInforme o valor do nó a ser consultado: ");
                     x = le.nextLong();
                     if (arv.buscar(x) != null) {
                         System.out.print("\nValor encontrado!");
                     } else {
-                        System.out.print("\nValor nï¿½o encontrado!");
+                        System.out.print("\nValor não encontrado!");
                     }
                     break;
                 }
                 case 7: {
-                    System.out.print("\nExibindo Arvore: ");
+                    System.out.print("\nExibindo árvore: ");
                     arv.caminhar();
                     break;
                 }
                 case 8: {
+                	System.out.print("\nInvertendo árvore: ");
                     arv.inverterEimprimir();
                     break;
                 }
